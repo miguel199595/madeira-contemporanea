@@ -228,10 +228,9 @@ return (
       <Helmet>
         <title>Madeira Contemporânea | Carpintaria e Mobiliário por Medida em Viseu</title>
         <meta name="description" content="Serviços de carpintaria em Viseu. Mobiliário por medida, cozinhas, roupeiros, pavimentos e portas. Qualidade, rigor e orçamentos gratuitos." />
-        <link rel="canonical" href="https://www.madeiracontemporanea.vercel.app" />
+        <link rel="canonical" href="https://madeira-contemporanea.vercel.app" />
       </Helmet>
 
-      {/* AQUI ESTAVA O ERRO: O conteúdo precisa estar dentro de um elemento pai */}
       <div 
         className="min-h-screen font-sans text-stone-800 antialiased selection:bg-[#5D4A3A]/30 selection:text-stone-900"
         style={{
@@ -302,7 +301,7 @@ return (
               href={`mailto:${businessEmail}?subject=Pedido de Orçamento`}
               className="inline-flex items-center justify-center rounded-xl bg-[#b5895a] px-8 py-3.5 text-sm font-semibold tracking-wider text-white shadow-xl hover:bg-[#5D4A3A] transition duration-300 transform hover:scale-[1.02]"
             >
-              Pedir Orçamento
+              Pedir Orçamento Grátis
             </a>
           </div>
         </div>
