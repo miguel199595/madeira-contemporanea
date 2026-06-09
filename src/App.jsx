@@ -40,7 +40,6 @@ const reparacaoImgs = Object.values(reparacaoModules).map(mod => mod.default || 
 
 const fallbackImg = "";
 
-// CARREGAMENTO E ORDENAÇÃO MANUAL DOS PARCEIROS
 const partnersModules = import.meta.glob('./assets/Imagens/Parceiros/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG}', { eager: true });
 const rawPartners = Object.values(partnersModules).map(mod => mod.default || mod);
 
@@ -229,7 +228,7 @@ return (
       <Helmet>
         <title>Madeira Contemporânea | Carpintaria e Mobiliário por Medida em Viseu</title>
         <meta name="description" content="Serviços de carpintaria em Viseu. Mobiliário por medida, cozinhas, roupeiros, pavimentos e portas. Qualidade, rigor e orçamentos gratuitos." />
-        <link rel="canonical" href="https://www.madeiracontemporanea.pt" />
+        <link rel="canonical" href="https://www.madeiracontemporanea.vercel.app" />
       </Helmet>
 
       {/* AQUI ESTAVA O ERRO: O conteúdo precisa estar dentro de um elemento pai */}
