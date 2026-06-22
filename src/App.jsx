@@ -15,7 +15,7 @@ const FacebookIcon = ({ className }) => (
   </svg>
 );
 
-// CORREÇÃO DO IMPORT DO LOGO (SINTAXE CORRETA ES6)
+// IMPORT DO LOGO (SINTAXE CORRETA ES6)
 import logoSrc from './assets/Imagens/madeiracontemporanealogo.png';
 
 // CARREGAMENTO DINÂMICO DE IMAGENS (VITE GLOB)
@@ -165,6 +165,33 @@ export default function App() {
         <title>Madeira Contemporânea | Carpintaria e Mobiliário por Medida em Viseu</title>
         <meta name="description" content="Serviços de carpintaria em Viseu. Mobiliário por medida, cozinhas, roupeiros, pavimentos e portas. Qualidade, rigor e orçamentos gratuitos." />
         <link rel="canonical" href="https://madeiracontemporanea.pt" />
+        
+        {/* Meta Tags Open Graph para Redes Sociais */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Madeira Contemporânea | Carpintaria em Viseu" />
+        <meta property="og:description" content="Mobiliário por medida, cozinhas, roupeiros, pavimentos e portas com acabamentos rigorosos. Mais de 40 anos de experiência." />
+        <meta property="og:url" content="https://madeiracontemporanea.pt" />
+        <meta property="og:image" content={logoSrc} />
+
+        {/* Dados Estruturados Google (Schema.org) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Madeira Contemporânea",
+            "image": "https://madeiracontemporanea.pt" + logoSrc,
+            "telephone": "+351963614802",
+            "email": "madeira.contemporaneas@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Viseu",
+              "addressCountry": "PT"
+            },
+            "url": "https://madeiracontemporanea.pt",
+            "priceRange": "$$",
+            "description": "Fabrico e instalação de elementos de carpintaria por medida em Viseu."
+          })}
+        </script>
       </Helmet>
 
       <div 
@@ -179,7 +206,7 @@ export default function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#5D4A3A]/90 border-b border-stone-400/20 shadow-xs py-1 text-white backdrop-blur-md h-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8 h-full">
           <div onClick={scrollToTop} className="flex items-center cursor-pointer h-full py-2">
-            <img src={logoSrc} alt="Madeira Contemporânea" className="h-full w-auto max-w-[220px] sm:max-w-[300px] object-contain" loading="eager" />
+            <img src={logoSrc} alt="Logótipo Oficial Madeira Contemporânea - Carpintaria Viseu" className="h-full w-auto max-w-[220px] sm:max-w-[300px] object-contain" loading="eager" />
           </div>
           
           <div className="hidden space-x-6 lg:space-x-8 md:flex items-center">
@@ -187,9 +214,14 @@ export default function App() {
             <a href="#partners" className="text-sm lg:text-base font-semibold text-white hover:text-[#b5895a] transition-colors">Parceiros</a>
             <a href="#catalogues" className="text-sm lg:text-base font-semibold text-white hover:text-[#b5895a] transition-colors">Catálogos</a>
             <a href="#contact" className="text-sm lg:text-base font-semibold text-white hover:text-[#b5895a] transition-colors">Contactos</a>
+            
+            {/* BOTÃO PEDIR ORÇAMENTO DESKTOP */}
+            <a href={`mailto:${businessEmail}?subject=Pedido de Orçamento`} className="inline-flex items-center justify-center rounded-xl bg-[#b5895a] px-5 py-2 text-sm font-semibold tracking-wider text-white shadow-md hover:bg-[#4d3d30] transition duration-300 transform hover:scale-[1.02]">
+              Pedir Orçamento
+            </a>
           </div>
 
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-md z-50 relative text-white bg-black/20" aria-label="Menu">
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-md z-50 relative text-white bg-black/20" aria-label="Menu Transversal">
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -201,27 +233,32 @@ export default function App() {
         <a href="#partners" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold hover:text-[#e3be98] transition-colors">Parceiros</a>
         <a href="#catalogues" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold hover:text-[#e3be98] transition-colors">Catálogos</a>
         <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold hover:text-[#e3be98] transition-colors">Contactos</a>
+        
+        {/* BOTÃO PEDIR ORÇAMENTO MOBILE */}
+        <a href={`mailto:${businessEmail}?subject=Pedido de Orçamento`} onClick={() => setMobileMenuOpen(false)} className="inline-flex items-center justify-center rounded-xl bg-[#b5895a] px-8 py-3.5 text-lg font-semibold tracking-wider text-white shadow-xl hover:bg-[#4d3d30] transition duration-300 transform active:scale-95 w-[80%] max-w-sm text-center">
+          Pedir Orçamento
+        </a>
       </div>
 
       {/* CARROSSEL PRINCIPAL (HERO) */}
       <header className="relative h-screen w-full bg-stone-900 text-white overflow-hidden flex items-center">
         {heroImages.map((imgUrl, idx) => (
           <div key={idx} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentHeroIdx ? 'opacity-100' : 'opacity-0'}`}>
-            <img src={imgUrl} alt={`Carrossel Slide ${idx + 1}`} className="h-full w-full object-cover" loading={idx === 0 ? "eager" : "lazy"} />
+            <img src={imgUrl} alt={`Madeira Contemporânea - Projeto de Carpintaria e Madeiras por Medida Viseu - Painel ${idx + 1}`} className="h-full w-full object-cover" loading={idx === 0 ? "eager" : "lazy"} />
             <div className="absolute inset-0 bg-stone-950/40" />
           </div>
         ))}
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center md:text-left z-10 w-full mt-20 flex flex-col items-center md:items-start">
           <div className="mb-5 transform transition-transform duration-500 hover:scale-105">
-            <img src={logoSrc} alt="Madeira Contemporânea Logo" className="h-16 sm:h-24 md:h-28 w-auto object-contain filter drop-shadow-2xl" loading="eager" />
+            <img src={logoSrc} alt="Logótipo Principal Madeira Contemporânea" className="h-16 sm:h-24 md:h-28 w-auto object-contain filter drop-shadow-2xl" loading="eager" />
           </div>
 
           <h1 className="max-w-4xl text-3xl font-light tracking-tight sm:text-5xl lg:text-6xl text-white leading-[1.15] drop-shadow-lg">
             Mobiliário e Carpintaria <br /><span className="font-serif italic text-[#e3be98]">Sob Medida</span>
           </h1>
           
-          <p className="mt-4 max-w-2xl text-sm sm:text-base text-stone-200 leading-relaxed font-normal drop-shadow-md px-2 sm:px-0">
+          <p className="mt-4 max-w-2xl text-sm sm:text-base text-stone-200 elegance leading-relaxed font-normal drop-shadow-md px-2 sm:px-0">
             Fabrico e instalação de elementos de carpintaria por medida, incluindo pavimentos, portas, roupeiros e revestimentos, assegurando elevados padrões de qualidade, durabilidade e excelência nos acabamentos.
           </p>
           
@@ -258,7 +295,7 @@ export default function App() {
                 onClick={() => setActiveLightbox({ src: service.images[service.currentIdx], title: service.title })}
                 className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden mb-5 shadow-xs bg-stone-100 cursor-zoom-in"
               >
-                <img src={service.images[service.currentIdx]} alt={service.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                <img src={service.images[service.currentIdx]} alt={`${service.title} por medida - Trabalho de excelência realizado pela Madeira Contemporânea Viseu`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                 
                 {service.images.length > 1 && (
                   <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 flex justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -290,11 +327,11 @@ export default function App() {
       {/* MODAL / LIGHTBOX */}
       {activeLightbox && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4 backdrop-blur-sm" onClick={() => setActiveLightbox(null)}>
-          <button onClick={() => setActiveLightbox(null)} className="absolute top-6 right-6 p-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-colors" aria-label="Fechar">
+          <button onClick={() => setActiveLightbox(null)} className="absolute top-6 right-6 p-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-colors" aria-label="Fechar Janela">
             <X className="h-6 w-6" />
           </button>
           <div className="relative max-w-5xl max-h-[80vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <img src={activeLightbox.src} alt={activeLightbox.title} className="max-w-full max-h-[80vh] rounded-lg object-contain shadow-2xl border border-white/10" />
+            <img src={activeLightbox.src} alt={`Galeria Ampliada: ${activeLightbox.title}`} className="max-w-full max-h-[80vh] rounded-lg object-contain shadow-2xl border border-white/10" />
           </div>
           <p className="text-white text-base sm:text-lg font-semibold tracking-wide mt-4 bg-stone-900/60 px-4 py-2 rounded-full backdrop-blur-xs text-center">
             {activeLightbox.title}
@@ -347,7 +384,7 @@ export default function App() {
               const isLargeLogo = lowerUrl.includes('tarkett') || lowerUrl.includes('portrisa');
               return (
                 <div key={idx} className={`h-16 sm:h-20 flex items-center justify-center bg-[#faf6f0] border border-stone-300/60 rounded-xl shadow-xs w-full max-w-[170px] sm:w-44 overflow-hidden transition-all duration-300 ${isLargeLogo ? 'p-1.5' : 'p-3 sm:p-4'}`}>
-                  <img src={imgUrl} alt={`Logotipo Parceiro ${idx + 1}`} className={`max-h-full max-w-full object-contain transition-transform duration-300 ${isLargeLogo ? 'scale-[1.15]' : ''}`} loading="lazy" />
+                  <img src={imgUrl} alt={`Logótipo do Parceiro Distribuidor Oficial - Madeira Contemporânea Viseu - Imagem ${idx + 1}`} className={`max-h-full max-w-full object-contain transition-transform duration-300 ${isLargeLogo ? 'scale-[1.15]' : ''}`} loading="lazy" />
                 </div>
               );
             })}
@@ -366,7 +403,7 @@ export default function App() {
           {catalogues.map((catalog, idx) => (
             <a key={idx} href={catalog.pdfUrl} target="_blank" rel="noreferrer" className="group flex flex-col bg-[#faf6f0]/90 rounded-2xl overflow-hidden border border-stone-300/40 shadow-xs hover:shadow-md transition-all duration-300">
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-100">
-                <img src={catalog.image} alt={catalog.title} className="h-full w-full object-cover" loading="lazy" />
+                <img src={catalog.image} alt={`Catálogo Técnico de Produtos e Soluções: ${catalog.title}`} className="h-full w-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-stone-900/30 transition-colors duration-300 flex items-center justify-center">
                   <div className="bg-white/90 backdrop-blur-xs text-stone-800 p-4 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 shadow-md">
                     <FileText className="h-6 w-6 text-[#b5895a]" />
@@ -374,7 +411,7 @@ export default function App() {
                 </div>
               </div>
               <div className="p-4 bg-white border-t border-stone-200/50 flex items-center justify-between">
-                <span className="text-sm font-bold text-stone-900 group-hover:text-[#b5895a] transition-colors">{catalog.title}</span>
+                <h3 className="text-sm font-bold text-stone-900 group-hover:text-[#b5895a] transition-colors">{catalog.title}</h3>
                 <span className="text-[11px] text-[#b5895a] font-medium uppercase tracking-wider group-hover:underline flex items-center gap-1.5 shrink-0">
                   PDF <Download className="h-3.5 w-3.5" />
                 </span>
@@ -432,27 +469,27 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-[#5D4A3A] py-12 text-center text-xs text-stone-200 border-t border-stone-700/40 pb-32 md:pb-12">
+      {/* FOOTER - OTIMIZADO PARA MOBILE */}
+      <footer className="bg-[#5D4A3A] py-8 md:py-12 text-center text-sm md:text-xs text-stone-200 border-t border-stone-700/40 pb-12 md:pb-12">
         <p>© 2026 Madeira Contemporânea. Todos os direitos reservados.</p>
       </footer>
 
       {/* REDES FLUTUANTES DIRETAMENTE SOBREPOSTAS */}
       <div className="fixed right-4 bottom-6 sm:bottom-24 z-50 flex flex-col space-y-3 pointer-events-auto">
-        <a href={`https://wa.me/${businessPhone}`} target="_blank" rel="noreferrer" className="p-3 sm:p-3.5 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#20ba56] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="WhatsApp">
+        <a href={`https://wa.me/${businessPhone}`} target="_blank" rel="noreferrer" className="p-3 sm:p-3.5 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#20ba56] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="WhatsApp Link Flutuante">
           <WhatsAppIcon className="h-5 w-5" />
         </a>
-        <a href={`${facebookUser}`} target="_blank" rel="noreferrer" className="p-3 sm:p-3.5 bg-[#1877F2] text-white rounded-full shadow-2xl hover:bg-[#1565d4] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="Facebook">
+        <a href={`${facebookUser}`} target="_blank" rel="noreferrer" className="p-3 sm:p-3.5 bg-[#1877F2] text-white rounded-full shadow-2xl hover:bg-[#1565d4] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="Facebook Link Flutuante">
           <FacebookIcon className="h-5 w-5" />
         </a>
-        <a href={`mailto:${businessEmail}`} className="p-3 sm:p-3.5 bg-[#5D4A3A] text-white rounded-full shadow-2xl hover:bg-[#4d3d30] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="Email">
+        <a href={`mailto:${businessEmail}`} className="p-3 sm:p-3.5 bg-[#5D4A3A] text-white rounded-full shadow-2xl hover:bg-[#4d3d30] transition hover:-translate-x-1.5 duration-200 flex items-center justify-center" aria-label="Email Link Flutuante">
           <Mail className="h-5 w-5" />
         </a>
       </div>
 
       {/* BOTÃO DE VOLTAR AO TOPO */}
       {showScrollTop && (
-        <button onClick={scrollToTop} className="fixed left-4 bottom-6 sm:left-6 sm:bottom-6 z-50 p-3 bg-[#b5895a] text-white rounded-xl shadow-2xl hover:bg-[#5D4A3A] transition-all duration-200 transform hover:scale-105 pointer-events-auto" aria-label="Voltar ao topo">
+        <button onClick={scrollToTop} className="fixed left-4 bottom-6 sm:left-6 sm:bottom-6 z-50 p-3 bg-[#b5895a] text-white rounded-xl shadow-2xl hover:bg-[#5D4A3A] transition-all duration-200 transform hover:scale-105 pointer-events-auto" aria-label="Voltar para o Topo da Página">
           <ArrowUp className="h-6 w-6" />
         </button>
       )}
