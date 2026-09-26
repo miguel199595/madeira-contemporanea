@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 import { Phone, Mail, ArrowUp, Menu, X, Hammer, Shield, Star, Clock, ChevronLeft, ChevronRight, FileText, Award, Download } from 'lucide-react';
 
 // ICONES VETORIAIS (REDES SOCIAIS)
@@ -159,8 +160,11 @@ export default function App() {
     setServices(prev => prev.map((s, idx) => idx === serviceIdx ? { ...s, currentIdx: (s.currentIdx - 1 + s.images.length) % s.images.length } : s));
   };
 
-  return (
+ return (
     <HelmetProvider>
+      {/* ATIVAÇÃO DO VERCEL ANALYTICS */}
+      <Analytics />
+
       <Helmet>
         <title>Madeira Contemporânea | Carpintaria e Mobiliário por Medida em Viseu</title>
         <meta name="description" content="Serviços de carpintaria em Viseu. Mobiliário por medida, cozinhas, roupeiros, pavimentos e portas. Qualidade, rigor e orçamentos gratuitos." />
