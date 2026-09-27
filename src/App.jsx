@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { LegalModal } from './LegalModal';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { Phone, Mail, ArrowUp, Menu, X, Hammer, Shield, Star, Clock, ChevronLeft, ChevronRight, FileText, Award, Download } from 'lucide-react';
@@ -66,6 +67,8 @@ export default function App() {
   const [activeLightbox, setActiveLightbox] = useState(null);
   
   const sliderIntervalRef = useRef(null);
+
+  const [modalType, setModalType] = useState(null); // 'privacy' | 'cookies' | null
 
   const [services, setServices] = useState([
     {
@@ -473,9 +476,26 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER - OTIMIZADO PARA MOBILE */}
-      <footer className="bg-[#5D4A3A] py-8 md:py-12 text-center text-sm md:text-xs text-stone-200 border-t border-stone-700/40 pb-12 md:pb-12">
+   {/* FOOTER - OTIMIZADO COM CURSOR POINTER NOS LINKS */}
+      <footer className="bg-[#5D4A3A] py-8 md:py-12 text-center text-sm md:text-xs text-stone-200 border-t border-stone-700/40 pb-24 md:pb-12">
         <p>© 2026 Madeira Contemporânea. Todos os direitos reservados.</p>
+        
+        {/* LINKS COM HOVER #b5895a E CURSOR MÃOZINHA (cursor-pointer) */}
+        <div className="flex justify-center items-center gap-4 text-xs text-stone-300 mt-3">
+          <button 
+            onClick={() => setModalType('privacy')} 
+            className="hover:text-[#b5895a] underline transition-colors focus:outline-none cursor-pointer"
+          >
+            Política de Privacidade
+          </button>
+          <span className="text-stone-500">•</span>
+          <button 
+            onClick={() => setModalType('legal')} 
+            className="hover:text-[#b5895a] underline transition-colors focus:outline-none cursor-pointer"
+          >
+            Informação Legal
+          </button>
+        </div>
       </footer>
 
       {/* REDES FLUTUANTES DIRETAMENTE SOBREPOSTAS */}
@@ -497,6 +517,28 @@ export default function App() {
           <ArrowUp className="h-6 w-6" />
         </button>
       )}
+
+      {/* MODAL DAS POLÍTICAS DE PRIVACIDADE E INFORMAÇÃO LEGAL */}
+      <LegalModal
+        isOpen={modalType !== null}
+        onClose={() => setModalType(null)}
+        title={modalType === 'privacy' ? 'Política de Privacidade' : 'Informação Legal'}
+        content={
+          modalType === 'privacy' ? (
+            <div className="space-y-3">
+              <p><strong>1. Apresentação:</strong> O site da Madeira Contemporânea é uma plataforma meramente informativa para apresentação do nosso portfólio e serviços de carpintaria em Viseu.</p>
+              <p><strong>2. Tratamento de Dados:</strong> Não recolhemos dados pessoais de forma automática, nem dispomos de base de dados ou registo de utilizadores no site.</p>
+              <p><strong>3. Contacto Direto:</strong> Quaisquer dados facultados pelo visitante (como telefone ou e-mail) ocorrem exclusivamente quando este decide iniciar contacto direto connosco através das nossas hiperligações do WhatsApp, e-mail ou chamada telefónica.</p>
+              <p><strong>4. Os Seus Direitos:</strong> Pode a qualquer momento solicitar o esclarecimento ou eliminação das suas mensagens nos nossos canais de contacto oficiais.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p><strong>1. Utilização do Site:</strong> Todo o conteúdo visual e textual presente neste site pertence à Madeira Contemporânea.</p>
+              <p><strong>2. Cookies:</strong> Este site não utiliza cookies de rastreio publicitário ou de recolha de dados pessoais. São utilizados apenas elementos técnicos essenciais para o correto funcionamento da navegação.</p>
+            </div>
+          )
+        }
+      />
       </div> 
     </HelmetProvider>
   );
